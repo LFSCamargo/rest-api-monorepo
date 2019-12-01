@@ -1,0 +1,35 @@
+{
+  "name": "rip",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "LFSCamargo",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "server:clean": "yarn workspace @rip/api clear",
+    "server:dev": "yarn workspace @rip/api clear",
+    "server:build": "yarn workspace @rip/api build:webpack"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/styled-components",
+      "**/styled-components/**",
+      "**/react-native-*",
+      "**/react-native-*/**",
+      "**/@react-navigation/web*",
+      "**/@react-navigation/web*/**"
+    ]
+  },
+  "dependencies": {
+    "eres": "^1.0.1"
+  },
+  "devDependencies": {
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-react": "^4.1.0"
+  }
+}

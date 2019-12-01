@@ -1,0 +1,8 @@
+{
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-airbnb"],
+  "rules": {
+    "variable-name": false,
+    "member-access": false,
+    "jsx-no-lambda": false
+  }
+}
