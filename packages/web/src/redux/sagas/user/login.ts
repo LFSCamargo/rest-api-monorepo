@@ -48,6 +48,7 @@ function* login(action: IUserAction) {
   }
 
   if (token) {
+    localStorage.setItem('token', token);
     return yield put({
       type: LOGIN_SUCCESS,
       token,

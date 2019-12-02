@@ -1,3 +1,4 @@
+import { History } from 'history';
 export const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
 export const GET_USER_FAIL = 'user/GET_USER_FAIL';
 export const GET_USER = 'user/GET_USER';
@@ -11,6 +12,7 @@ export const SIGNUP_SUCCESS = 'user/SIGNUP_SUCCESS';
 export const SIGNUP_FAIL = 'user/SIGNUP_FAIL';
 
 export const TOKEN_UPDATE = 'user/TOKEN_UPDATE';
+export const CLEAR_TOKEN = 'user/CLEAR_TOKEN';
 
 export const tokenUpdate = (token: string | null) => ({
   type: TOKEN_UPDATE,
@@ -27,14 +29,15 @@ export const login = (email: string, password: string) => ({
   password
 });
 
-export const signup = (email: string, name: string, password: string) => ({
+export const signup = (email: string, name: string, password: string, history: History) => ({
   type: SIGNUP,
   email,
   name,
-  password
+  password,
+  history
 });
 
-interface IUser {
+export interface IUser {
   id: string;
   email: string;
   name: string;
@@ -59,6 +62,7 @@ export interface IUserAction {
   password: string;
   name: string;
   token: string;
+  history: History,
 }
 
 const initialState = {
@@ -79,6 +83,12 @@ export default (state: IUserState = initialState, action: IUserAction) => {
       return {
         ...state,
         token,
+      }
+    }
+
+    case CLEAR_TOKEN: {
+      return {
+        ...initialState
       }
     }
 
