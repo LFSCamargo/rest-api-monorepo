@@ -1,15 +1,17 @@
-import express from 'express';
+import fastify from 'fastify';
+import cors from 'fastify-cors';
 import mongoose from 'mongoose';
 import { MONGO, PORT } from './config';
 import { getMe, getUser, postLogin, postSignUp } from './modules/user/userResolvers';
 
-const app = express();
+const app = fastify();
+app.register(cors);
 
 // User routes
-app.get('/api/me', getMe);
-app.get('/api/user/:id', getUser);
-app.post('/api/login', postLogin);
-app.post('/api/signUp', postSignUp);
+app.get('/api/me', (req, res) => getMe(req, res));
+app.get('/api/user/:id', (req, res) => getUser(req, res));
+app.post('/api/login', (req, res) => postLogin(req, res));
+app.post('/api/signUp', (req, res) => postSignUp(req, res));
 
 mongoose.connect(MONGO, {}, (error) => {
   if (error) {
