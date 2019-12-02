@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "server:clean": "yarn workspace @rip/api clear",
-    "server:dev": "yarn workspace @rip/api clear",
+    "server:dev": "yarn workspace @rip/api dev",
     "server:build": "yarn workspace @rip/api build:webpack",
     "web:test": "yarn workspace @rip/web test",
     "web:start": "yarn workspace @rip/web start",
