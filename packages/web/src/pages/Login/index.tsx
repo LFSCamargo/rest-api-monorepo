@@ -8,6 +8,7 @@ import { Dispatch } from 'redux';
 import { login } from '../../redux/ducks/user/user';
 import { IGlobalState } from '../../redux/ducks';
 import Loading from '../../components/Loading';
+import { withRouter, RouterProps } from 'react-router';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -56,7 +57,7 @@ const Wrapper = styled.div`
   }
 `;
 
-interface IProps {
+interface IProps extends RouterProps {
   login(email: string, password: string): void;
   loading: boolean;
   error: string | null;
@@ -74,14 +75,14 @@ const Login: React.FunctionComponent<IProps> = (props) => {
         <Input placeholder="Email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
         <Input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
         {props.loading ? <ul><Loading /></ul> : <Button onClick={() => props.login(email, password)} title="Login" />}
-        <ButtonTransparent title="Already have a account? Register here" />
+        <ButtonTransparent onClick={() => props.history.push('/signup')} title="Dont have a account? Register here" />
         {props.error && <span>{props.error}</span>}
       </div>
     </Wrapper>
   )
 };
 
-export default connect(
+export default withRouter(connect(
   (state: IGlobalState) => {
     return {
       loading: state.user.loadingLogin,
@@ -93,4 +94,4 @@ export default connect(
       login: (email: string, password: string) => dispatch(login(email, password)),
     };
   },
-)(Login);
+)(Login));
