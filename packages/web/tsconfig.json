@@ -5,6 +5,7 @@
     "module": "esnext",
     "target": "es5",
     "lib": ["es6", "dom"],
+    "types": ["react", "jest", "node"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -17,7 +18,8 @@
     "importHelpers": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "typeRoots": ["../../@types/*"]
   },
   "exclude": [
     "node_modules",
@@ -26,6 +28,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
-  ]
+    "src/setupTests.ts",
+    "../../node_modules",
+  ],
 }
