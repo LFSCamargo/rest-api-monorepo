@@ -1,4 +1,3 @@
-// tslint:disable: no-console
 import { takeLatest, put, call } from 'redux-saga/effects';
 import { LOGIN, IUserAction, LOGIN_FAIL, LOGIN_SUCCESS } from '../../../redux/ducks/user/user';
 import { eres } from '../../../utils';
@@ -33,8 +32,6 @@ function* login(action: IUserAction) {
   const [res, err] = yield call(eres, tryLogin(email, password));
 
   if (err) {
-    console.log('err', err);
-    
     return yield put({
       type: LOGIN_FAIL,
       error: err.message,
