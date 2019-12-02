@@ -3,6 +3,9 @@
   "rules": {
     "variable-name": false,
     "member-access": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "import-name": false,
+    "ordered-imports": false,
+    "object-literal-sort-keys": false
   }
 }
