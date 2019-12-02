@@ -4,25 +4,31 @@ import { errors } from '../../constants';
 import bcrypt from 'bcryptjs';
 
 export const getMe = async (req: any, res: any) => {
-  const { authorization } = req.headers;
+  try {
+    const { authorization } = req.headers;
 
-  if (!authorization) {
+    if (!authorization) {
+      return res.send({
+        error: errors.userErrors.invalidToken,
+      });
+    }
+
+    const user = await getUserFromToken(authorization);
+
+    if (!user) {
+      throw new Error(errors.userErrors.invalidToken);
+    }
+
+    return res.send({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+    } as IUser);
+  } catch {
     return res.send({
       error: errors.userErrors.invalidToken,
     });
   }
-
-  const user = await getUserFromToken(authorization);
-
-  if (!user) {
-    throw new Error(errors.userErrors.invalidToken);
-  }
-
-  return res.send({
-    id: user._id,
-    name: user.name,
-    email: user.email,
-  } as IUser);
 };
 
 export const getUser = async (req: any, res: any) => {
