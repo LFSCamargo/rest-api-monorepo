@@ -32,21 +32,27 @@ export const getMe = async (req: any, res: any) => {
 };
 
 export const getUser = async (req: any, res: any) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const user = await UserModel.findOne({ _id: id });
+    const user = await UserModel.findOne({ _id: id });
 
-  if (!user) {
+    if (!user) {
+      return res.send({
+        error: errors.userErrors.doesNotExists,
+      });
+    }
+
     return res.send({
-      error: errors.userErrors.doesNotExists,
+      id: user._id,
+      name: user.name,
+      email: user.email,
+    } as IUser);
+  } catch (error) {
+    return res.send({
+      error: errors.server.internalServerError,
     });
   }
-
-  return res.send({
-    id: user._id,
-    name: user.name,
-    email: user.email,
-  } as IUser);
 };
 
 export const postLogin = async (req: any, res: any) => {
@@ -65,7 +71,7 @@ export const postLogin = async (req: any, res: any) => {
 
     const { password: hash } = user;
 
-    const isValidPassword = bcrypt.compare(password, hash || '');
+    const isValidPassword = await bcrypt.compare(password, hash || '');
 
     if (!isValidPassword) {
       return res.send({
