@@ -2,11 +2,12 @@ import mongoose from 'mongoose';
 import { eres } from '../../../utils/promise';
 import { MONGO_TEST } from '../../../config';
 import { generateToken } from '../../../auth/jwt';
-import { buildFastify } from '../../../test/buidFastify';
 import { createUser } from '../../../test/createRows';
 import UserModel from '../userModel';
+import app from '../../../routes';
+import { errors } from '../../../constants';
 
-const fastify = buildFastify();
+const fastify = app;
 
 beforeAll(async () => {
   mongoose.connect(MONGO_TEST);
@@ -18,8 +19,8 @@ afterEach(async () => {
 });
 
 afterAll(async () => {
-  mongoose.disconnect();
   UserModel.remove({});
+  mongoose.disconnect();
 });
 
 it('should query the user with the token', async () => {
@@ -41,7 +42,7 @@ it('should query the user with the token', async () => {
     const { statusCode, payload } = response;
     const { email: resEmail, name: resName, error } = JSON.parse(payload);
 
-    expect(error).not.toBe('Invalid token');
+    expect(error).not.toBe(errors.userErrors.invalidToken);
     expect(statusCode).toBe(200);
     expect(email).toBe(resEmail);
     expect(name).toBe(resName);
@@ -64,7 +65,7 @@ it('should not query the user with no token', async () => {
     const { statusCode, payload } = response;
     const { error } = JSON.parse(payload);
 
-    expect(error).toBe('Invalid token');
+    expect(error).toBe(errors.userErrors.invalidToken);
     expect(statusCode).toBe(200);
   }
 });
