@@ -1,7 +1,7 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects';
 import { GET_USER, GET_USER_FAIL, GET_USER_SUCCESS, CLEAR_TOKEN } from '../../../redux/ducks/user/user';
 import { eres } from '../../../utils';
-import { IGlobalState } from 'src/redux/ducks';
+import { IGlobalState } from '../../../redux/ducks';
 
 const getMe = async (token: string) => await fetch('http://localhost:4000/api/me', {
   method: 'GET',

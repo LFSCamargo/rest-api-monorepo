@@ -5,7 +5,7 @@ import { IGlobalState } from '../../redux/ducks';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { getUser, IUser, CLEAR_TOKEN } from '../../redux/ducks/user/user';
-import Loading from 'src/components/Loading';
+import Loading from '../../components/Loading';
 
 const Wrapper = styled.div`
   width: 100vw;
