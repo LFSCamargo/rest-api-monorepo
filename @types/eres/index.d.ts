@@ -1,7 +1,5 @@
-declare module 'eres' {
-  const eres: EresFn;
-  interface EresFn {
-    <T, Error>(value: Promise<T>): Promise<[Error, T]>;
-  }
-  export default eres;
+declare const eres: EresFn;
+declare interface EresFn {
+  <T, Error>(value: Promise<T>): Promise<[Error, T]>;
 }
+export default eres;
