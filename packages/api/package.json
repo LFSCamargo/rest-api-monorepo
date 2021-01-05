@@ -37,7 +37,7 @@
     "webpack-shell-plugin": "^0.5.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "faker": "^4.1.0",
     "fastify": "^1.12.1",
